@@ -33,7 +33,7 @@ namespace FriendLogger
             {
                 Con.Log(val ? "Auto Log Friends - On" : "Auto Log Friends - Off");
                 Config.Inst.Config.autoLog = val;
-            });
+            }, Config.Inst.Config.autoLog);
         }
         internal static IEnumerator LogFriendsToFile()
         {
