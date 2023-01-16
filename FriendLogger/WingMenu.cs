@@ -97,7 +97,6 @@ namespace FriendLogger
                         .WriteToConsole("Friend ", ConsoleColor.DarkYellow)
                         .WriteToConsole(text, ConsoleColor.White)
                         .WriteLineToConsole(" is already in the list!", ConsoleColor.DarkYellow);
-
             }
             yield break;
         }
