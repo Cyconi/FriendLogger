@@ -8,12 +8,7 @@ using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements.UIR;
-using VRC.Core;
-using VRC.UI.Elements;
 using WorldAPI;
 using WorldAPI.ButtonAPI;
 using WorldAPI.ButtonAPI.Buttons;
@@ -51,8 +46,10 @@ namespace FriendLogger
             Init().Start();
             IEnumerator Init()
             {
-                while (GameObject.Find("Canvas_QuickMenu(Clone)") == null) yield return null;
+                while (GameObject.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Wing_Left/Container/InnerContainer/WingMenu") == null) yield return null;
+                yield return null;
 
+                Con.Log("Bulding Wings...");
                 WingMenu.WingButtons();
 
                 yield break;

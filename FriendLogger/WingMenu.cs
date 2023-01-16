@@ -1,29 +1,32 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorldAPI;
-using WorldAPI.ButtonAPI;
-using WorldAPI.ButtonAPI.Groups;
-using WorldAPI.ButtonAPI.MM;
-using WorldAPI.ButtonAPI.Wing.Buttons;
-using WorldAPI.ButtonAPI.Wing;
-using WorldLoader.Utils;
 using UnityEngine;
-using VRC.Core;
-using System.Collections;
-using System.IO;
+using WorldAPI.ButtonAPI.Groups;
+using WorldAPI.ButtonAPI;
+using WorldAPI.ButtonAPI.Wing;
+using WorldAPI.ButtonAPI.Wing.Buttons;
 using WorldAPI.ButtonAPI.WIng.Buttons;
+using WorldLoader.Utils;
+using WorldAPI.ButtonAPI.MM;
 
 namespace FriendLogger
 {
     internal class WingMenu
     {
+        public static VRCPage MainPage;
+
+        public static WPage wingPage;
         internal static void WingButtons()
         {
-            var wingPage = new WPage("Friend Logger", APIBase.WingSide.Left);
-            new WButton(APIBase.WingSide.Left, "Friend Logger", () => wingPage.OpenMenu(), "Friend Button");
+            MainPage = new("FOR SOME REASON IF A QM PAGE DOESNT EXIST YOU CANT MAKE A WING PAGE WTF I SPENT LIKE 5 FUCKING DAYYS TRYING TO FIGURE THIS OUT!!!!!!!!!", true);
+
+            wingPage = new("Friend Logger", WorldAPI.APIBase.WingSide.Left);
+            new WButton(WorldAPI.APIBase.WingSide.Left, "Friend Logger", () => wingPage.OpenMenu(), "Friend Button");
 
             new WButton(wingPage, "Log Friends", () => 
             {
@@ -34,6 +37,7 @@ namespace FriendLogger
                 Con.Log(val ? "Auto Log Friends - On" : "Auto Log Friends - Off");
                 Config.Inst.Config.autoLog = val;
             }, Config.Inst.Config.autoLog);
+            Con.Log("Wings Made!");
         }
         internal static IEnumerator LogFriendsToFile()
         {
@@ -47,7 +51,7 @@ namespace FriendLogger
                 yield break;
             }
             yield return new WaitForSeconds(1f);
-            foreach (string text in APIUser.CurrentUser.friendIDs)
+            foreach (string text in VRC.Core.APIUser.CurrentUser.friendIDs)
             {
                 if (!File.ReadLines("Friends/FriendList.txt").Contains(text))
                 {
@@ -74,7 +78,7 @@ namespace FriendLogger
                 yield break;
             }
             yield return new WaitForSeconds(1f);
-            foreach (string text in APIUser.CurrentUser.friendIDs)
+            foreach (string text in VRC.Core.APIUser.CurrentUser.friendIDs)
             {
                 if (!File.ReadLines("Friends/FriendList.txt").Contains(text))
                 {
